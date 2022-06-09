@@ -759,7 +759,8 @@ au FileType fish set tabstop=4
 "----------------------------------------------
 " Language: gitconfig
 "----------------------------------------------
-au BufNewFile,BufRead .gitconfig* setf gitconfig
+au BufNewFile,BufRead .*gitconfig* setf gitconfig
+au BufNewFile,BufRead gitconfig* setf gitconfig
 au FileType gitconfig set noexpandtab
 au FileType gitconfig set shiftwidth=4
 au FileType gitconfig set softtabstop=4

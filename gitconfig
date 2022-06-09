@@ -1,6 +1,5 @@
-[user]
-	email = marshall.mcmullen@gmail.com
-	name = Marshall McMullen
+[include]
+	path = .gitconfig-user
 
 [core]
 	pager = less --no-init --quit-if-one-screen
