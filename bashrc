@@ -88,6 +88,12 @@ export LC_ALL=en_US.UTF-8
 
 DEFAULT_USER=mmcmullen
 
+# If brew is installed add it to our path as necessary
+BREW_PATH="$(which brew 2>/dev/null)"
+if [[ -n "${BREW_PATH}" ]]; then
+    BREW_PATH="${BREW_PATH%/bin/brew}"
+fi
+
 ## Path
 path=(
     ~/bin
@@ -95,11 +101,9 @@ path=(
     ~/code/ebash/bin
     ~/.local/bin
     ~/.gem/ruby/current/bin
-    /usr/local/opt/make/libexec/gnubin
-    /usr/local/opt/coreutils/libexec/gnubin
-    /usr/local/opt/libpq/bin
+    "${BREW_PATH}/opt/make/libexec/gnubin"
+    "${BREW_PATH}/opt/coreutils/libexec/gnubin"
     ${PATH}
-
 )
 PATH=$(echo "${path[@]}" | sed -e 's| |:|g')
 
