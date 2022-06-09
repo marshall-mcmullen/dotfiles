@@ -3,121 +3,119 @@
 	name = Marshall McMullen
 
 [core]
-    pager = less --no-init --quit-if-one-screen
+	pager = less --no-init --quit-if-one-screen
 
 [color]
-    diff = auto
+	diff = auto
 
 [push]
-    default = upstream
+	default = upstream
 
 [fetch]
-    prune = true
+	prune = true
 
 [diff]
-    submodule = diff
+	submodule = diff
 
 [merge]
-    conflictstyle = diff3
-    tool = meld3
-    guitool = meld3
-    tool = meld3
+	conflictstyle = diff3
+	tool = meld3
+	guitool = meld3
+	tool = meld3
 
 [mergetool "meld3"]
-    cmd = meld --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\"
-    trustExitCode = false
+	cmd = meld --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\"
+	trustExitCode = false
 
 [mergetool "vimdiff"]
-    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [mergetool]
-    prompt = false
-    keepBackup = false
+	prompt = false
+	keepBackup = false
 
 [difftool]
-    prompt = false
+	prompt = false
 
 [log]
-    decorate = auto
-    follow = true
+	decorate = auto
+	follow = true
 
 [clean]
-    requireForce = false
+	requireForce = false
 
 [alias]
-    branches = branch -vv
-    branch2tag = "!sh -c 'set -e;git tag $1 refs/heads/$1;git branch -D $1' -"
-    br = branch -vv
-    up = checkout
-    out = log --oneline @{upstream}..
-    in =  log --oneline ..@{upstream}
-    mdiff = difftool --tool=meld
-    vdiff = difftool --tool=vimdiff -y
-    kmerge = mergetool --tool=kdiff3
-    kdiff = difftool --tool=kdiff3
-    mmerge = mergetool --tool=meld3
-    unstash = stash pop
-    sub = submodule
-    tags = tag -l --sort=v:refname
+	branches = branch -vv
+	branch2tag = "!sh -c 'set -e;git tag $1 refs/heads/$1;git branch -D $1' -"
+	br = branch -vv
+	up = checkout
+	out = log --oneline @{upstream}..
+	in =  log --oneline ..@{upstream}
+	mdiff = difftool --tool=meld
+	vdiff = difftool --tool=vimdiff -y
+	kmerge = mergetool --tool=kdiff3
+	kdiff = difftool --tool=kdiff3
+	mmerge = mergetool --tool=meld3
+	unstash = stash pop
+	sub = submodule
+	tags = tag -l --sort=v:refname
 
-    # Command shortcuts
-    cp = cherry-pick
-    st = status -s
-    cl = clone
-    ci = commit
-    co = "!sh -c 'set -e; echo \">> Checking out $1...\"; git checkout $1; echo \">> Updating submodules...\"; git submodule update --init' -"
-    cob = checkout -b
-    diff = diff --word-diff
-    dc = diff --cached
+	# Command shortcuts
+	cp = cherry-pick
+	st = status -s
+	cl = clone
+	ci = commit
+	co = "!sh -c 'set -e; echo \">> Checking out $1...\"; git checkout $1; echo \">> Updating submodules...\"; git submodule update --init' -"
+	cob = checkout -b
+	diff = diff --word-diff
+	dc = diff --cached
 
-    # Reset commands
-    r = reset
-    r1 = reset HEAD^
-    r2 = reset HEAD^^
-    rh = reset --hard
-    rh1 = reset HEAD^ --hard
-    rh2 = reset HEAD^^ --hard
-    upc = !git reset --hard HEAD && git clean && git submodule update --init
+	# Reset commands
+	r = reset
+	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	rh1 = reset HEAD^ --hard
+	rh2 = reset HEAD^^ --hard
+	upc = !git reset --hard HEAD && git clean && git submodule update --init
 
-    # LIST ALIASES
-    #ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    #ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-    #lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-    #ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	# LIST ALIASES
+	#ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	#ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	#lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	#ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-    # FILE
-    filelog = log -u
-    fl = log -u
+	# FILE
+	filelog = log -u
+	fl = log -u
 
-    # Last commit
-    dl = "!git ll -1"
+	# Last commit
+	dl = "!git ll -1"
 
-    # Diff last commit
-    dlc = diff --cached HEAD^
+	# Diff last commit
+	dlc = diff --cached HEAD^
 
-    # Full diff of a commit given a revision
-    dr  = "!f() { git diff "$1"^.."$1"; }; f"
-    lc  = "!f() { git ll "$1"^.."$1"; }; f"
-    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+	# Full diff of a commit given a revision
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
 
-    # RECURSIVE operations supporting submodules better
-    rclone = clone --recursive
-    rpull = "!git pull && git submodule update --init --recursive"
-    rpush = push --recurse-submodules=on-demand
-    # git submodule foreach git tag -l
+	# RECURSIVE operations supporting submodules better
+	rclone = clone --recursive
+	rpull = "!git pull && git submodule update --init --recursive"
+	rpush = push --recurse-submodules=on-demand
+	# git submodule foreach git tag -l
 
 [pull]
-    rebase = false
+	rebase = false
 
 [status]
-    submoduleSummary = true
-
-[url "ssh://git@bitbucket.org/liqid/"]
-    insteadOf = https://bitbucket.org/liqid/
+	submoduleSummary = true
 
 [submodule]
-    recurse = false
+	recurse = false
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
