@@ -132,7 +132,7 @@ alias diff='colordiff'
 [[ $- != *i* ]] && return
 
 # Load keychain
-eval $(keychain --eval --lockwait 120 --inherit any --agents ssh id_rsa)
+eval $(keychain --eval --lockwait 120 --inherit any --agents ssh id_rsa id_ed25519)
 
 ## History
 # Avoid duplicates
