@@ -86,7 +86,9 @@ source $OSH/oh-my-bash.sh
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-DEFAULT_USER=mmcmullen
+if [[ -f ~/.bashrc-local ]]; then
+    source ~/.bashrc-local
+fi
 
 # If brew is installed add it to our path as necessary
 BREW_PATH="$(which brew 2>/dev/null)"
