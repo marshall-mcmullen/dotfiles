@@ -239,62 +239,6 @@
             ]
         },
         {
-            "description": "yabai/float/place (opt + shift - [arrow])",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "up_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "option",
-                                "shift"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --grid 1:1:0:0:1:1"
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "left_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "option",
-                                "shift"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --grid 1:2:0:0:1:1"
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "right_arrow",
-                        "modifiers": {
-                            "mandatory": [
-                                "option",
-                                "shift"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --grid 1:2:1:0:1:1"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "description": "yabai/desktop/create (shift/opt + cmd - n)",
             "manipulators": [
                 {
@@ -1421,12 +1365,12 @@
             ]
         },
         {
-            "description": "yabai/window/toggle/view (opt - a, opt + shift - b)",
+            "description": "yabai/window/toggle/layout (opt + [es])",
             "manipulators": [
                 {
                     "type": "basic",
                     "from": {
-                        "key_code": "a",
+                        "key_code": "e",
                         "modifiers": {
                             "mandatory": [
                                 "option"
@@ -1435,45 +1379,7 @@
                     },
                     "to": [
                         {
-                            "shell_command": "/opt/homebrew/bin/yabai -m space --toggle padding; /opt/homebrew/bin/yabai -m space --toggle gap"
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "b",
-                        "modifiers": {
-                            "mandatory": [
-                                "option",
-                                "shift"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --toggle border"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "description": "yabai/window/toggle/and_place (opt - [tsp])",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "t",
-                        "modifiers": {
-                            "mandatory": [
-                                "option"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --toggle float; /opt/homebrew/bin/yabai -m window --grid 4:4:1:1:2:2"
+                            "shell_command": "/opt/homebrew/bin/yabai -m space --layout bsp"
                         }
                     ]
                 },
@@ -1489,61 +1395,6 @@
                     },
                     "to": [
                         {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --toggle topmost"
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "p",
-                        "modifiers": {
-                            "mandatory": [
-                                "option"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m window --toggle sticky;\n/opt/homebrew/bin/yabai -m window --toggle topmost;\n/opt/homebrew/bin/yabai -m window --grid 5:5:4:0:1:1"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "description": "yabai/window/toggle/layout (opt + ctrl - [ad])",
-            "manipulators": [
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "a",
-                        "modifiers": {
-                            "mandatory": [
-                                "option",
-                                "control"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "/opt/homebrew/bin/yabai -m space --layout bsp"
-                        }
-                    ]
-                },
-                {
-                    "type": "basic",
-                    "from": {
-                        "key_code": "d",
-                        "modifiers": {
-                            "mandatory": [
-                                "option",
-                                "control"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
                             "shell_command": "/opt/homebrew/bin/yabai -m space --layout float"
                         }
                     ]
@@ -1551,7 +1402,7 @@
             ]
         },
         {
-            "description": "yabai/window/close (alt + w)",
+            "description": "yabai/window/close (opt + w)",
             "manipulators": [
                 {
                     "type": "basic",
@@ -1572,7 +1423,7 @@
             ]
         },
         {
-            "description": "yabai/exec/terminal (alt + return)",
+            "description": "yabai/exec/terminal (opt + return)",
             "manipulators": [
                 {
                     "type": "basic",
