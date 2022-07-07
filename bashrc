@@ -126,6 +126,7 @@ alias ls='ls --color'
 alias vimdiff='nvim -d'
 alias kj='kill -9 %1'
 alias diff='colordiff'
+alias vi='nvim'
 
 # If not running interactively, don't do anything
 # ! shopt -oq posix; then
