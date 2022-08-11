@@ -106,6 +106,8 @@ path=(
     "${BREW_PATH}/bin"
     "${BREW_PATH}/opt/make/libexec/gnubin"
     "${BREW_PATH}/opt/coreutils/libexec/gnubin"
+    "${BREW_PATH}/opt/openjdk/bin"
+    "${BREW_PATH}/opt/man-db/libexec/bin"
     ${PATH}
 )
 PATH=$(echo "${path[@]}" | sed -e 's| |:|g')
@@ -120,8 +122,15 @@ cdpath=(
 )
 CDPATH=$(echo "${cdpath[@]}" | sed -e 's| |:|g')
 
+## Bash Completions
+if [[ -n "${BREW_PATH}" ]]; then
+    source "${BREW_PATH}/etc/profile.d/bash_completion.sh"
+    source "${BREW_PATH}/share/bash-completion/completions/cmake"
+fi
+
 ## Aliases
 EDITOR="nvim"
+PAGER="most"
 alias ls='ls --color'
 alias vimdiff='nvim -d'
 alias kj='kill -9 %1'
@@ -156,9 +165,6 @@ export MAKEFLAGS="-j $(nproc)"
 # Go
 export GOPATH=~/code/go
 export GOPRIVATE=github.com/reserve-trust/*
-
-# Docker
-#export DOCKER_HOST=ssh://marshall@asgard
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

@@ -1,6 +1,9 @@
 [include]
 	path = .gitconfig-user
 
+[init]
+	defaultBranch = main
+
 [core]
 	pager = less --no-init --quit-if-one-screen
 
@@ -18,11 +21,11 @@
 
 [merge]
 	conflictstyle = diff3
-	tool = meld3
-	guitool = meld3
-	tool = meld3
+	tool = meld
+	guitool = meld
+	tool = meld
 
-[mergetool "meld3"]
+[mergetool "meld"]
 	cmd = meld --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\"
 	trustExitCode = false
 
@@ -54,7 +57,7 @@
 	vdiff = difftool --tool=vimdiff -y
 	kmerge = mergetool --tool=kdiff3
 	kdiff = difftool --tool=kdiff3
-	mmerge = mergetool --tool=meld3
+	mmerge = mergetool --tool=meld
 	unstash = stash pop
 	sub = submodule
 	tags = tag -l --sort=v:refname
@@ -66,7 +69,7 @@
 	ci = commit
 	co = "!sh -c 'set -e; echo \">> Checking out $1...\"; git checkout $1; echo \">> Updating submodules...\"; git submodule update --init' -"
 	cob = checkout -b
-	diff = diff --word-diff
+	diff = diff --word-diff -w
 	dc = diff --cached
 
 	# Reset commands
