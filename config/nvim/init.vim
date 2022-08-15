@@ -869,9 +869,9 @@ au FileType python set tabstop=4
 " Language: ReStructured Text (RST)
 "----------------------------------------------
 au FileType rst set expandtab
-au FileType rst set shiftwidth=4
-au FileType rst set softtabstop=4
-au FileType rst set tabstop=4
+au FileType rst set shiftwidth=3
+au FileType rst set softtabstop=3
+au FileType rst set tabstop=3
 
 "----------------------------------------------
 " Language: Ruby
