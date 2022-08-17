@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Automatically detect connected monitors
+# sudo /usr/local/bin/autoxrandr
+
+# Start screensaver
+nice -n 19 xscreensaver -nosplash &
+
+# Monitor screensaver events so we can react to them in custom ways
+#/usr/local/bin/xscreensaver-watch &
+
+# Start graphical program launcher
+/usr/bin/albert &
+
+# Start window manager
+export TERMINAL="mate-terminal"
+exec /usr/bin/i3
