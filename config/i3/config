@@ -177,21 +177,21 @@ bindsym Control+Escape exec xscreensaver-command -lock
 bindsym --release button2 kill
 
 # Composting manager
-exec --no-startup-id compton --config ~/.config/compton.conf -b
+#exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 # Workspace1
-exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/workspace-1.json'"
-exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://gmail.com --enable-extensions"
+#exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/workspace-1.json'"
+#exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://gmail.com --enable-extensions"
 #exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://teams.microsoft.com"
-exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://teams.microsoft.com/_#/conversations/General?threadId=19:5a23be31d15746ec97304b400133ccff@thread.tacv2&ctx=channel"
-exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://teams.microsoft.com/_#/conversations/19:b66fc3d1c7ae40f4ba3b23173f319840@thread.v2?ctx=chat"
+#exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://teams.microsoft.com/_#/conversations/General?threadId=19:5a23be31d15746ec97304b400133ccff@thread.tacv2&ctx=channel"
+#exec --no-startup-id i3-msg "workspace 1; exec google-chrome-stable --app=https://teams.microsoft.com/_#/conversations/19:b66fc3d1c7ae40f4ba3b23173f319840@thread.v2?ctx=chat"
 #exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/slack"
 
 # Workspace2
-exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/workspace-2.json'"
-exec --no-startup-id i3-msg "workspace 3; exec /usr/bin/google-chrome-stable --new-window"
-exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/mate-terminal"
-exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/mate-terminal"
+#exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/workspace-2.json'"
+#exec --no-startup-id i3-msg "workspace 3; exec /usr/bin/google-chrome-stable --new-window"
+#exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/mate-terminal"
+#exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/mate-terminal"
 
 # Workspace3
 # TODO: How do we make this conditional if we actually have a third monitor
