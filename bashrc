@@ -114,9 +114,10 @@ PATH=$(echo "${path[@]}" | sed -e 's| |:|g')
 
 cdpath=(
     ~
-    ~/code/liqid
-    ~/code/sf
     ~/code/automox
+    ~/code/liqid
+    ~/code/rt
+    ~/code/sf
     ~/code
     ${CDPATH}
 )
