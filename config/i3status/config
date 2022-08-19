@@ -8,6 +8,7 @@ order += "disk /home"
 order += "ethernet _first_"
 order += "wireless _first_"
 order += "battery 1"
+order += "cpu_usage"
 order += "load"
 order += "tztime local"
 
@@ -30,16 +31,23 @@ wireless _first_ {
 }
 
 battery 1 {
-    format = "🔋 %status %percentage %remaining"
+    format = "🔋%status %percentage %remaining"
     integer_battery_capacity = true
     last_full_capacity = true
+}
+
+cpu_usage {
+    format = "☢️ %usage"
+    max_threshold = 75
+    degraded_threshold = 25
+}
+
+load {
+    format = "(%1min)"
 }
 
 tztime local {
     format = "📅 %Y-%m-%d %H:%M:%S"
 }
 
-load {
-    format = "☢️  %1min"
-}
 
