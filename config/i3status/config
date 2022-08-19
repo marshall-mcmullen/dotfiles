@@ -20,8 +20,8 @@ disk "/home" {
 }
 
 ethernet _first_ {
-    format_up = "📶 E: %ip"
-    format_down = "E: down"
+    format_up = "ᯤ E: %ip"
+    format_down = "ᯤ E: down"
 }
 
 wireless _first_ {
