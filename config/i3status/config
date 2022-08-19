@@ -40,6 +40,6 @@ tztime local {
 }
 
 load {
-    format = "📊 %1min"
+    format = "☢️  %1min"
 }
 
