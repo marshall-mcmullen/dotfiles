@@ -26,7 +26,7 @@ ethernet _first_ {
 }
 
 wireless _first_ {
-    format_up = "W: (%quality at %essid) %ip"
+    format_up = "W:(%quality at %essid) %ip"
     format_down = "W: down"
 }
 
@@ -44,7 +44,7 @@ battery 1 {
 }
 
 cpu_usage {
-    format = "☢️  %usage"
+    format = "☢️ %usage"
     max_threshold = 75
     degraded_threshold = 50
 }
