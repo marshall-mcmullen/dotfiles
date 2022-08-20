@@ -7,7 +7,7 @@ output "eDP-1" {
 input "type:touchpad" {
     natural_scroll enabled
     tap enabled
-    middle_emulation enabled
+    tap_button_map lrm
 }
 
 set $mod Mod1
@@ -150,6 +150,9 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# The middle button over a titlebar kills the window
+bindsym $mod+button2 kill
 
 # Screensaver
 exec swayidle -w                                \
