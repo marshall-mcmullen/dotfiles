@@ -167,6 +167,7 @@ bindsym Control+Escape exec swaylock -f -c 000000
 ## START SERVICES ##
 #exec --no-startup-id env DISPLAY:=0 nice -n 19 xscreensaver -nosplash
 exec --no-startup-id env DISPLAY=:0 albert
+exec --no-startup-id env DISPLAY=:0 libinput-gestures
 
 # Start bar
 bar {
