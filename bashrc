@@ -145,6 +145,9 @@ alias chrome='google-chrome-stable'
 # ! shopt -oq posix; then
 [[ $- != *i* ]] && return
 
+# Load keychain
+eval $(keychain --eval --lockwait 120 --inherit any --agents ssh id_rsa id_ed25519)
+
 ## History
 # Avoid duplicates
 HISTCONTROL=ignoredups:erasedups
