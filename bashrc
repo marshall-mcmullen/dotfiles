@@ -103,6 +103,7 @@ path=(
     ~/code/ebash/bin
     ~/.local/bin
     ~/.gem/ruby/current/bin
+    /usr/local/bin
     "${BREW_PATH}/bin"
     "${BREW_PATH}/opt/make/libexec/gnubin"
     "${BREW_PATH}/opt/coreutils/libexec/gnubin"
