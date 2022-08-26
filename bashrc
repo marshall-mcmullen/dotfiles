@@ -142,11 +142,13 @@ alias sgit='sudo git -c "include.path='"${HOME}/.config/git/config\" -c \"includ
 alias chrome='google-chrome-stable'
 
 # If not running interactively, don't do anything
-# ! shopt -oq posix; then
 [[ $- != *i* ]] && return
 
 # Load keychain
-eval $(keychain --eval --lockwait 120 --inherit any --agents ssh id_rsa id_ed25519)
+eval $(keychain --nogui --eval --lockwait 120 --agents ssh id_rsa id_ed25519)
+
+# show message of the day
+cat /etc/motd
 
 ## History
 # Avoid duplicates
