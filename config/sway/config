@@ -1,6 +1,10 @@
 # Display settings
 output "eDP-1" {
-    scale 1
+    scale 2
+    bg ~/Pictures/nix-wallpaper-dracula.png fill
+}
+
+output "DP-6" {
     bg ~/Pictures/nix-wallpaper-dracula.png fill
 }
 
@@ -167,6 +171,7 @@ bindsym Control+Escape exec swaylock -f -c 000000
 ## START SERVICES ##
 #exec --no-startup-id env DISPLAY:=0 nice -n 19 xscreensaver -nosplash
 exec --no-startup-id env DISPLAY=:0 albert
+exec --no-startup-id bluetooth-trackpad
 exec --no-startup-id env DISPLAY=:0 libinput-gestures
 
 # Start bar
