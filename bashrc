@@ -131,8 +131,11 @@ CDPATH=$(echo "${cdpath[@]}" | sed -e 's| |:|g')
 
 ## Bash Completions
 if [[ -n "${BREW_PATH}" ]]; then
-    source "${BREW_PATH}/etc/profile.d/bash_completion.sh"
-    source "${BREW_PATH}/share/bash-completion/completions/cmake"
+    for path in "${BREW_PATH}/etc/profile.d/bash_completion.sh" "${BREW_PATH}/share/bash-completion/completions/cmake"; do
+        if [[ -f "${path}" ]]; then
+            source "${path}"
+        fi
+    done
 fi
 
 ## Aliases
@@ -153,7 +156,9 @@ alias chrome='google-chrome-stable'
 eval $(keychain --nogui --eval --lockwait 120 --agents ssh id_rsa id_ed25519)
 
 # show message of the day
-cat /etc/motd
+if [[ -f /etc/motd ]]; then
+    cat /etc/motd
+fi
 
 ## History
 # Avoid duplicates
