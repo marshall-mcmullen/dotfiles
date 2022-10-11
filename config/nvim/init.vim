@@ -148,6 +148,11 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+" Automatically set file type based on shebang
+if has("autocmd")
+  au BufNewFile,BufRead * if match(getline(1),"bash") >= 0 | set filetype=bash | endif
+endif
+
 "----------------------------------------------
 " Colors
 "----------------------------------------------
@@ -595,6 +600,14 @@ let g:rooter_patterns = ['go.mod']
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 2
 let g:localvimrc_whitelist = '/home/marshall/code/ebash/.lvimrc'
+
+"----------------------------------------------
+" Language: Bash
+"----------------------------------------------
+au FileType bash set noexpandtab
+au FileType bash set shiftwidth=4
+au FileType bash set softtabstop=4
+au FileType bash set tabstop=4
 
 "----------------------------------------------
 " Language: Golang

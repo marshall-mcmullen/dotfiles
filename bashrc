@@ -83,6 +83,10 @@ source $OSH/oh-my-bash.sh
 #
 #----------------------------------------------------------------------------------------------------------------------
 
+# Disable noclobber which oh-my-bash enabled
+set +o noclobber
+
+# I18N settings
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -114,7 +118,7 @@ path=(
 PATH=$(echo "${path[@]}" | sed -e 's| |:|g')
 
 cdpath=(
-    ${PWD}
+    \${PWD}
     ~
     ~/code/automox
     ~/code/liqid
