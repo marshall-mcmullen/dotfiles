@@ -604,7 +604,7 @@ let g:localvimrc_whitelist = '/home/marshall/code/ebash/.lvimrc'
 "----------------------------------------------
 " Language: Bash
 "----------------------------------------------
-au FileType bash set noexpandtab
+au FileType bash set expandtab
 au FileType bash set shiftwidth=4
 au FileType bash set softtabstop=4
 au FileType bash set tabstop=4
