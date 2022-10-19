@@ -616,6 +616,10 @@ inoreabbrev <expr> <bar><bar>
           \ <SID>isAtStartOfLine('\|\|') ?
           \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
 
+let g:table_mode_motion_left_map = '<S-Tab>'
+let g:table_mode_motion_right_map = '<Tab>'
+let g:table_mode_motion_down_map = '<Enter>'
+
 "----------------------------------------------
 " Language: Bash
 "----------------------------------------------
