@@ -26,7 +26,7 @@ ethernet _first_ {
 }
 
 wireless _first_ {
-    format_up = "W:(%quality at %essid) %ip"
+    format_up = "W:(%quality) %ip"
     format_down = "W: down"
 }
 
@@ -54,7 +54,7 @@ load {
 }
 
 tztime local {
-    format = "📅 %Y-%m-%d %I:%M"
+    format = "📅 %b %d %I:%M"
 }
 
 
