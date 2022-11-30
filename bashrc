@@ -153,7 +153,7 @@ alias chrome='google-chrome-stable'
 [[ $- != *i* ]] && return
 
 # Load keychain
-eval $(keychain --nogui --eval --lockwait 120 --agents ssh id_rsa id_ed25519)
+eval $(keychain --nogui --eval --lockwait 120 --agents ssh id_ed25519)
 
 # show message of the day
 if [[ -f /etc/motd ]]; then
