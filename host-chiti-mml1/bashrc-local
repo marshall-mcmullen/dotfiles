@@ -1,0 +1,5 @@
+DEFAULT_USER=mmcmullen
+
+# Load modules
+module load golang-1.19
+module load neovim-0.8.1
