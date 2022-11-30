@@ -140,7 +140,7 @@ fi
 
 ## Aliases
 EDITOR="nvim"
-PAGER="most"
+PAGER="more"
 alias ls='ls --color'
 alias vimdiff='nvim -d'
 alias kj='kill -9 %1'
