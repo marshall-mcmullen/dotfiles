@@ -90,10 +90,6 @@ set +o noclobber
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-if [[ -f ~/.bashrc-local ]]; then
-    source ~/.bashrc-local
-fi
-
 # If brew is installed add it to our path as necessary
 BREW_PATH="$(which brew 2>/dev/null)"
 if [[ -n "${BREW_PATH}" ]]; then
@@ -182,7 +178,13 @@ export MAKEFLAGS="-j $(nproc)"
 export GOPATH=~/code/go
 export GOPRIVATE=github.com/reserve-trust/*
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [[ -f ~/.fzf.bash ]]; then
+    source ~/.fzf.bash
+fi
+
+if [[ -f ~/.bashrc-local ]]; then
+    source ~/.bashrc-local
+fi
 
 return 0
 
