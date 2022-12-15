@@ -2,6 +2,8 @@ DEFAULT_USER=mmcmullen
 
 # Load modules
 {
+    module load git-lfs-3.2.0
     module load golang-1.19
     module load neovim-0.8.1
+    module load vagrant-2.3.2-1
 } &> /dev/null
