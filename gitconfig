@@ -5,7 +5,7 @@
 	defaultBranch = main
 
 [core]
-	pager = less --no-init --quit-if-one-screen
+	pager = less --no-init --quit-if-one-screen -x1,5
 
 [color]
 	diff = auto
