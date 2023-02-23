@@ -8,3 +8,5 @@ DEFAULT_USER=mmcmullen
     module load neovim-0.8.1
     module load vagrant-2.3.4-libvirt
 } &> /dev/null
+
+PATH+=":${NEOVIM_PREFIX}/bin"
