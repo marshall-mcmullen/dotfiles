@@ -1,85 +1,67 @@
 // vim:ts=4:sw=4:et
 {
     "border": "normal",
-    "current_border_width": 3,
+    "current_border_width": 2,
     "floating": "auto_off",
     "geometry": {
-       "height": 2113,
-       "width": 1916,
-       "x": 3842,
-       "y": 20
+       "height": 1401,
+       "width": 1096,
+       "x": 2258,
+       "y": 18
     },
-    "name": "New Tab - Google Chrome",
-    "percent": 0.5,
+    "marks": [],
+    "name": "Slack",
+    "percent": 0.25,
     "swallows": [
        {
-            "class": "^Google\\-chrome$",
-            "instance": "^google\\-chrome$",
-            "title": "^New\\ Tab\\ \\-\\ Google\\ Chrome$",
-            "window_role": "^browser$"
+         "class": "^Slack$",
+         "instance": "^slack$"
        }
     ],
     "type": "con"
 }
 
 {
-    // splitv split container with 2 children
     "border": "normal",
+    "current_border_width": 2,
     "floating": "auto_off",
-    "layout": "splitv",
-    "percent": 0.5,
-    "type": "con",
-    "nodes": [
-        {
-            "border": "normal",
-            "current_border_width": 3,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 674,
-               "width": 974,
-               "x": 0,
-               "y": 0
-            },
-            "name": "marshall@caprica: ~",
-            "percent": 0.5,
-            "swallows": [
-               {
-                    "class": "^Mate\\-terminal$",
-                    "instance": "^mate\\-terminal$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            // splith split container with 1 children
-            "border": "normal",
-            "floating": "auto_off",
-            "layout": "splith",
-            "percent": 0.5,
-            "type": "con",
-            "nodes": [
-                {
-                    "border": "normal",
-                    "current_border_width": 3,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 602,
-                       "width": 1054,
-                       "x": 0,
-                       "y": 0
-                    },
-                    "name": "i3-save-tree --workspace 2 > workspace-2.json",
-                    "percent": 1,
-                    "swallows": [
-                       {
-                            "class": "^Mate\\-terminal$",
-                            "instance": "^mate\\-terminal$"
-                       }
-                    ],
-                    "type": "con"
-                }
-            ]
-        }
-    ]
+    "geometry": {
+       "height": 483,
+       "width": 816,
+       "x": 0,
+       "y": 0
+    },
+    "marks": [],
+    "name": "Terminal",
+    "percent": 0.50,
+    "swallows": [
+       {
+         "class": "^Mate\\-terminal$",
+         "instance": "^mate\\-terminal$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1401,
+       "width": 1703,
+       "x": 5671,
+       "y": 18
+    },
+    "marks": [],
+    "name": "Chrome",
+    "percent": 0.25,
+    "swallows": [
+       {
+         "class": "^Google\\-chrome$",
+         "instance": "^google\\-chrome$"
+       }
+    ],
+    "type": "con"
 }
 
