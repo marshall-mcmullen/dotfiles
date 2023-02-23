@@ -114,7 +114,7 @@ path=(
 PATH=$(echo "${path[@]}" | sed -e 's| |:|g')
 
 cdpath=(
-    \${PWD}
+    .
     ~
     ~/code/automox
     ~/code/liqid
