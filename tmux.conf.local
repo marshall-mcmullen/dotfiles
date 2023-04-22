@@ -6,6 +6,8 @@
 
 # -- user customization --------------------------------------------------------
 
+set -g history-limit 20000
+
 # Set prefix to C-x
 set -gu prefix2
 unbind C-a
