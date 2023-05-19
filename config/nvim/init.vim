@@ -175,13 +175,13 @@ set background=dark
 let g:material_theme_style = 'dark'
 
 " Ayu colorscheme settings
+colorscheme ayu
 let ayucolor = 'mirage'
 
 " One colorscheme settings
 let g:one_allow_italics = 1
 
 " Set final color scheme
-colorscheme ayu
 let g:airline_theme='one'
 
 " Override the search highlight color with a combination that is easier to
