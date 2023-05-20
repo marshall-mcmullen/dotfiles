@@ -171,9 +171,6 @@ if [[ -f ~/.brew-updates.txt ]]; then
     cat ~/.brew-updates.txt
 fi
 
-# Make
-export MAKEFLAGS="-j $(nproc)"
-
 # Go
 export GOPATH=~/code/go
 export GOPRIVATE=github.com/reserve-trust/*
