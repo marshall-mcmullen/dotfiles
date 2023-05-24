@@ -126,7 +126,7 @@ endif
 
 " Enable mouse if possible
 if has('mouse')
-    set mouse=a
+    set mouse=r
 endif
 
 " Allow vim to set a custom font or color for a word
