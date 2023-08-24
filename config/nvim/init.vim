@@ -370,6 +370,7 @@ let g:calendar_view = "days"                  " Set days as the default view
 " Plugin: 'junegunn/fzf.vim'
 "----------------------------------------------
 nnoremap <c-p> :FZF<cr>
+nnoremap <c-o> :GFiles<cr>
 
 "----------------------------------------------
 " Plugin: 'majutsushi/tagbar'
