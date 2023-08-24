@@ -2,6 +2,7 @@ DEFAULT_USER=mmcmullen
 
 # Load modules
 {
+    module load clang-16.0
     module load git-2.39.1
     module load git-lfs-3.2.0
     module load golang-1.20
