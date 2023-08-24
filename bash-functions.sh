@@ -9,18 +9,10 @@ vi()
     fi
 
     if [[ "${@}" =~ "/" ]]; then
-        if [[ $# -eq 1 && -e "src/${1}" ]]; then
-            ${vim} "src/${1}"
-        else
-            ${vim} "${@}"
-        fi
+        ${vim} "${@}"
+    elif which fzf &>/dev/null && [[ $# -eq 1 ]]; then
+        ${vim} -p "$(fzf --multi --select-1 --exact --query "${1}")"
     else
-
-        matches=(
-            $(find . -maxdepth 1 -type f -name "${@}" -o -name "${@//-/_}")
-            $(find . -mindepth 2 -type f -name "${@}" -o -name "${@//-/_}")
-        )
-
-        ${vim} -p "${matches[@]}"
+        ${vim} -p "${@}"
     fi
 }
