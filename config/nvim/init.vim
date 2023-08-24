@@ -71,6 +71,7 @@ Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 Plug 'rodjek/vim-puppet'                       " Puppet syntax highlighting
 Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
 Plug 'zimbatm/haproxy.vim'                     " HAProxy syntax highlighting
+Plug 'rhysd/vim-clang-format'                  " Clang Format support
 
 " Colorschemes
 Plug 'NLKNguyen/papercolor-theme'
@@ -256,6 +257,12 @@ nnoremap <leader>h :split<cr>
 
 " Closing splits
 nnoremap <leader>q :close<cr>
+
+"----------------------------------------------
+" Plugin: rhysd/vim-clang-format
+"----------------------------------------------
+
+let g:ClangFormatAutoEnable = 1
 
 "----------------------------------------------
 " Plugin: MattesGroeger/vim-bookmarks
