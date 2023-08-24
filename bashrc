@@ -178,6 +178,10 @@ if [[ -f ~/.fzf.bash ]]; then
     source ~/.fzf.bash
 fi
 
+if [[ -f ~/.bash-functions.sh ]]; then
+    source ~/.bash-functions.sh
+fi
+
 if [[ -f ~/.bashrc-local ]]; then
     source ~/.bashrc-local
 fi
