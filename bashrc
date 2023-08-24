@@ -141,7 +141,6 @@ alias ls='ls --color'
 alias vimdiff='nvim -d'
 alias kj='kill -9 %1'
 alias diff='colordiff'
-alias vi='nvim'
 alias sgit='sudo git -c "include.path='"${HOME}/.config/git/config\" -c \"include.path=${HOME}/.gitconfig\""
 alias chrome='google-chrome-stable'
 
@@ -177,6 +176,10 @@ export GOPRIVATE=github.com/reserve-trust/*
 
 if [[ -f ~/.fzf.bash ]]; then
     source ~/.fzf.bash
+fi
+
+if [[ -f ~/.bash-functions.sh ]]; then
+    source ~/.bash-functions.sh
 fi
 
 if [[ -f ~/.bashrc-local ]]; then
