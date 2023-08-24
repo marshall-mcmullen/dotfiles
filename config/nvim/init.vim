@@ -259,10 +259,10 @@ nnoremap <leader>h :split<cr>
 nnoremap <leader>q :close<cr>
 
 "----------------------------------------------
-" Plugin: rhysd/vim-clang-format
+" Plugin: Clang Format
 "----------------------------------------------
 
-let g:ClangFormatAutoEnable = 1
+let g:clang_format#auto_format = 1
 
 "----------------------------------------------
 " Plugin: MattesGroeger/vim-bookmarks
