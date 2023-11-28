@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+git log --all --pretty=format: --name-only --diff-filter=A | sort -
+

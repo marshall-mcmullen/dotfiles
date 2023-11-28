@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+git rev-list --objects --all \
+    | awk '{print $2}' \
+    | sed '/^$/d' \
+    | sort -u
