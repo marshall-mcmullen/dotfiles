@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+bluetoothctl power on
+
+MAC="10:94:BB:AB:53:E0"
+
+bluetoothctl --timeout 10 scan on
+bluetoothctl trust  "${MAC}"
+bluetoothctl connect "${MAC}"
