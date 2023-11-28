@@ -85,6 +85,7 @@ call plug#end()
 "----------------------------------------------
 " General settings
 "----------------------------------------------
+filetype plugin on
 set autoindent                    " take indent for new line from previous line
 set smartindent                   " enable smart indentation
 set autoread                      " reload file if the file changes on the disk
