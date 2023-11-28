@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+OUTPUT=$(mktemp)
+
+UPDATES=$(nixos-rebuild dry-run --upgrade \
+    |& grep "^  " \
+    | sed -e 's|[^-]*-||' -e 's|.drv||' -e 's|^| │ |' \
+    | sort -u     \
+)
+
+if [[ -z "${UPDATES[@]}" ]]; then
+    cat /dev/null > "${OUTPUT}"
+else
+{
+    echo " ┌─ $(tput setaf 2)$(tput bold)Available Updates ── $(date) $(tput sgr0) ──────────────────────"
+    echo " │ "
+    echo "${UPDATES[@]}"
+    echo " │ "
+    echo " └──────────────────────────────────────────────────────────────────────────────"
+    echo ""
+
+} > "${OUTPUT}"
+fi
+
+chmod 644 "${OUTPUT}"
+cat "${OUTPUT}"
+
+if [[ ${EUID} -eq 0 ]]; then
+  mv "${OUTPUT}" "/etc/motd"
+fi

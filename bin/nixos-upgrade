@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+nixos-rebuild switch --upgrade |& nom
+cat /dev/null > /etc/motd
