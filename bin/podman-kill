@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+podman kill $(podman ps | awk '{print $1}' | grep -v CONTAINER)
