@@ -139,6 +139,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Start composition manager
+exec --no-startup-id picom --daemon
+
 # Start i3status
 bar {
     font pango:monospace 12
