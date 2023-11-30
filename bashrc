@@ -141,7 +141,7 @@ alias ls='ls --color'
 alias vimdiff='nvim -d'
 alias kj='kill -9 %1'
 alias diff='colordiff'
-alias sgit='sudo git -c "include.path='"${HOME}/.config/git/config\" -c \"include.path=${HOME}/.gitconfig\""
+alias sgit='sudo -E git -c "include.path='${HOME}'/.gitconfig"'
 alias chrome='google-chrome-stable'
 
 # If not running interactively, don't do anything
