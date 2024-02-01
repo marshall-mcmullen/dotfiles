@@ -10,12 +10,11 @@
        "y": 18
     },
     "marks": [],
-    "name": "Mailspring",
+    "name": "Thunderbird",
     "percent": 1,
     "swallows": [
        {
-         "class": "^Mailspring$",
-         "instance": "^mailspring$"
+         "class": "^Mail", "thunderbird$"
        }
     ],
     "type": "con"

@@ -14,8 +14,7 @@
     "percent": 0.25,
     "swallows": [
        {
-         "class": "^Slack$",
-         "instance": "^slack$"
+         "class": "^Slack$"
        }
     ],
     "type": "con"
@@ -36,8 +35,7 @@
     "percent": 0.50,
     "swallows": [
        {
-         "class": "^Mate\\-terminal$",
-         "instance": "^mate\\-terminal$"
+         "class": "^Mate\\-terminal$"
        }
     ],
     "type": "con"
@@ -58,8 +56,7 @@
     "percent": 0.25,
     "swallows": [
        {
-         "class": "^Google\\-chrome$",
-         "instance": "^google\\-chrome$"
+         "class": "^Google\\-chrome$"
        }
     ],
     "type": "con"

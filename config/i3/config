@@ -156,7 +156,7 @@ bindsym --release button2 kill
 
 # Workspace1
 exec --no-startup-id i3-msg "workspace 1; append_layout ~/.config/i3/workspace-1.json"
-exec --no-startup-id i3-msg "workspace 1; exec mailspring"
+exec --no-startup-id i3-msg "workspace 1; exec thunderbird"
 
 # Workspace2
 exec --no-startup-id i3-msg "workspace 2; append_layout ~/.config/i3/workspace-2.json"
