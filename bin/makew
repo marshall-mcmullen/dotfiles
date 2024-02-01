@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+clear
+
+inotifywait --recursive --monitor --event close_write src | while read change; do
+
+    parts=( ${change} )
+    dir=${parts[0]}
+    file=${parts[-1]}
+
+    path=$(readlink -e "${dir}/${file}")
+
+    if [[ "${path}" =~ @neomake ]]; then
+        continue
+    elif [[ -f "${path}" ]]; then
+        clear
+        echo ">> Building $@ (trigger=${path})"
+        make "${@}"
+
+        echo ">> Build Complete <<"
+    fi
+done
