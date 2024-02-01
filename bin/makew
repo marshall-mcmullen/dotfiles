@@ -8,7 +8,7 @@ inotifywait --recursive --monitor --event close_write src | while read change; d
     dir=${parts[0]}
     file=${parts[-1]}
 
-    path=$(readlink -e "${dir}/${file}")
+    path="${dir%/}/${file}"
 
     if [[ "${path}" =~ @neomake ]]; then
         continue
