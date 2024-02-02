@@ -2,7 +2,7 @@
 
 clear
 
-inotifywait --recursive --monitor --event close_write src | while read change; do
+inotifywait --recursive --monitor --event close_write . | while read change; do
 
     parts=( ${change} )
     dir=${parts[0]}
