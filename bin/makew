@@ -2,9 +2,9 @@
 
 clear
 
-inotifywait --recursive --monitor --event close_write . | while read change; do
+inotifywait --recursive --monitor --event close_write $(git ls-tree --name-only HEAD) | while read change; do
 
-    parts=( ${change} )
+    parts=(${change})
     dir=${parts[0]}
     file=${parts[-1]}
 
