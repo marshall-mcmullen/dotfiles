@@ -196,6 +196,11 @@ highlight Search guibg=DeepPink4 guifg=White ctermbg=53 ctermfg=White
 " Toggle background with <leader>bg
 map <leader>bg :let &background = (&background == "dark"? "light" : "dark")<cr>
 
+" Different color scheme for diff
+if @diff
+    colorscheme evening
+endif
+
 "----------------------------------------------
 " Searching
 "----------------------------------------------
