@@ -196,7 +196,7 @@ highlight Search guibg=DeepPink4 guifg=White ctermbg=53 ctermfg=White
 map <leader>bg :let &background = (&background == "dark"? "light" : "dark")<cr>
 
 " Different color scheme for diff
-if @diff
+if &diff
     colorscheme evening
 endif
 
