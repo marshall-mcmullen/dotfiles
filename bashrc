@@ -83,6 +83,9 @@ source $OSH/oh-my-bash.sh
 #
 #----------------------------------------------------------------------------------------------------------------------
 
+# Do not trigger build sound on tab-completion
+bind 'set bell-style none'
+
 # Disable noclobber which oh-my-bash enabled
 set +o noclobber
 
