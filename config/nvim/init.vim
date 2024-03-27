@@ -139,9 +139,6 @@ let mapleader = ','
 " Autosave buffers before leaving them
 autocmd BufLeave * silent! :wa
 
-" Remove trailing white spaces on save
-autocmd BufWritePre * :%s/\s\+$//e
-
 " Center the screen quickly
 nnoremap <space> zz
 
