@@ -2,11 +2,11 @@ DEFAULT_USER=mmcmullen
 
 # Load modules
 {
-    module load clang-16.0
-    module load git-2.39.1
-    module load git-lfs-3.2.0
-    module load golang-1.20
-    module load neovim-0.8.1
+    module load clang-17.0.6
+    module load git-latest
+    module load git-lfs-latest
+    module load golang-lateset
+    module load neovim-latest
 } &> /dev/null
 
 PATH+=":${NEOVIM_PREFIX}/bin"
