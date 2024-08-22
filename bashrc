@@ -94,7 +94,7 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # If brew is installed add it to our path as necessary
-BREW_PATH="$(which brew 2>/dev/null)"
+BREW_PATH="$(command -v brew 2>/dev/null)"
 if [[ -n "${BREW_PATH}" ]]; then
     BREW_PATH="${BREW_PATH%/bin/brew}"
 fi

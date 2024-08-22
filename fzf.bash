@@ -16,6 +16,6 @@ source "${HOME}/.fzf/shell/key-bindings.bash"
 # --------------
 
 # Use 'fd' instead of 'find' if available as it honors .gitignore
-if which fd &>/dev/null; then
+if command -v fd &>/dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 fi
