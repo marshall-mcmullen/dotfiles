@@ -150,8 +150,13 @@ alias chrome='google-chrome-stable'
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Load keychain
-eval $(keychain --nogui --eval --lockwait 120 --agents ssh id_ed25519)
+if [[ -f ~/.bash-color.sh ]]; then
+    source ~/.bash-color.sh
+fi
+
+if [[ -f ~/.bash-auth.sh ]]; then
+    source ~/.bash-auth.sh
+fi
 
 # show message of the day
 if [[ -f /etc/motd ]]; then
