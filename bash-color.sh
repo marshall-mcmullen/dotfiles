@@ -1,0 +1,9 @@
+#!/bin/bash
+
+COLOR_RED=$'\E[31m'
+COLOR_GREEN=$'\E[32m'
+COLOR_BLUE=$'\E[34m'
+COLOR_CYAN=$'\E[36m'
+COLOR_BOLD=$'\E[1m'
+COLOR_NONE=$'\E[0m'
+
