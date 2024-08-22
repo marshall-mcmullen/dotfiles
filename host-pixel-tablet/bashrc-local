@@ -1,1 +1,3 @@
 DEFAULT_USER=u0_a320
+alias rcup='command rcup -B pixel-tablet'
+alias rcdn='command rcdn -B pixel-tablet'
