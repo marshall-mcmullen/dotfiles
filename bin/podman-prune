@@ -4,7 +4,7 @@ set -e
 
 FILTER="until=168h"
 
-echo ">> Pruning containers'
+echo ">> Pruning containers"
 podman container prune --filter "${FILTER}"
 
 echo "Pruning images"
