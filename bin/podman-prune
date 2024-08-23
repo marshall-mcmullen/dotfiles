@@ -7,8 +7,8 @@ FILTER="until=168h"
 echo ">> Pruning containers"
 podman container prune --force --filter "${FILTER}"
 
-echo "Pruning images"
+echo ">> Pruning images"
 podman image prune --force --filter "${FILTER}"
 
-echo "Pruning volumes"
+echo ">> Pruning volumes"
 podman volume prune --force --filter "${FILTER}"
