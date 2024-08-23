@@ -5,10 +5,10 @@ set -e
 FILTER="until=168h"
 
 echo ">> Pruning containers"
-podman container prune --filter "${FILTER}"
+podman container prune --force --filter "${FILTER}"
 
 echo "Pruning images"
-podman image prune --filter "${FILTER}"
+podman image prune --force --filter "${FILTER}"
 
 echo "Pruning volumes"
-podman volume prune --filter "${FILTER}"
+podman volume prune --force --filter "${FILTER}"
