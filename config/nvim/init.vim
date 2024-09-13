@@ -261,6 +261,15 @@ nnoremap <leader>h :split<cr>
 nnoremap <leader>q :close<cr>
 
 "----------------------------------------------
+" Sorting
+"----------------------------------------------
+" Custom natural sort command that works with line ranges
+command! -range=% SortV <line1>,<line2>!sort -V
+
+" Create an alias so that ':sortv' command gets mapped to ":SortV" function
+cnoreabbrev sortv SortV
+
+"----------------------------------------------
 " Plugin: Clang Format
 "----------------------------------------------
 
