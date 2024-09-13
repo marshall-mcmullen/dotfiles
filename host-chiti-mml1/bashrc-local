@@ -5,6 +5,7 @@ DEFAULT_USER=mmcmullen
     module load clang-17.0.6
     module load git-latest
     module load git-lfs-latest
+    module load jtnctl-latest
     module load golang-lateset
     module load neovim-latest
 } &> /dev/null
