@@ -203,9 +203,10 @@ endif
 "----------------------------------------------
 
 " Use tab for trigger completion with characters ahead and navigate
-" in the completion list
+" in the completion list and ENTER to select it.
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 
 " Use <c-space> to trigger completion
 inoremap <silent><expr> <C-Space> coc#refresh()
@@ -216,6 +217,15 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call CocActionAsync('doHover')<CR>
+
+" Use gd to go to definition of symbol under cursor
+nmap <silent> gd <Plug>(coc-definition)
+
+" Use gr to find references of symbol under cursor
+nmap <silent> gr <Plug>(coc-references)
+
+" Automatically show diagnostics in the status line
+set updatetime=300
 
 "----------------------------------------------
 " Searching
