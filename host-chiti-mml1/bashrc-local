@@ -8,6 +8,7 @@ DEFAULT_USER=mmcmullen
     module load golang-lateset
     module load jtnctl-latest
     module load neovim-latest
+    module load nodejs-latest
 } &> /dev/null
 
 PATH+=":${NEOVIM_PREFIX}/bin"
