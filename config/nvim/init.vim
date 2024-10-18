@@ -27,6 +27,7 @@ Plug 'junegunn/vim-emoji'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neomake/neomake'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'sbdchd/neoformat'
@@ -196,6 +197,25 @@ map <leader>bg :let &background = (&background == "dark"? "light" : "dark")<cr>
 if &diff
     colorscheme evening
 endif
+
+"----------------------------------------------
+" Code Completion
+"----------------------------------------------
+
+" Use tab for trigger completion with characters ahead and navigate
+" in the completion list
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" Use <c-space> to trigger completion
+inoremap <silent><expr> <C-Space> coc#refresh()
+
+" Use [g and ]g to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call CocActionAsync('doHover')<CR>
 
 "----------------------------------------------
 " Searching
