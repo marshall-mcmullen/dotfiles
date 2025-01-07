@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+RETURN=0
+
+# Note: The .keep files are created by portage packages as placeholders to prevent certain critical directories
+#       from being deleted during an --unmerge or an upgrade. But they are not actually owned by any ebuild.
+WHITELIST=(
+    /*/*/.keep*
+    /*/.keep*
+    /.dockerenv
+    /boot/System.map-*
+    /boot/grub
+    /boot/initramfs-*
+    /boot/kernel-*
+    /etc
+    /home
+    /lib/modules
+    /root
+    /run/docker.sock
+    /tmp
+    /usr/bin
+    /usr/lib/gconv
+    /usr/lib64
+    /usr/local
+    /usr/portage
+    /usr/sbin
+    /usr/share
+    /usr/src
+    /var/.updated
+    /var/cache
+    /var/db
+    /var/lib
+    /var/log
+    /var/nullmailer
+    /var/spool
+    /var/tmp
+)
+
+# Create a variable to hold the whitelist in a format used for find
+EXCEPTIONS="-path $(echo ${WHITELIST[@]} | sed -e 's/ / -prune -o -path /g') -prune -o"
+
+# Find files that do not belong to packages and therefore appear to be orphans
+RESULTS=$(find / -xdev ${EXCEPTIONS} -type f -exec qfile -o {} +)
+if [[ ${RESULTS} ]]; then
+    echo "Files present that are not part of a package:"
+    echo "$RESULTS"
+    RETURN=1
+fi
+
+exit ${RETURN}

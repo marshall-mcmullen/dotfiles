@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# tssh
+# michael.odell@netapp.com
+# version 0.20171115
+ 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+ 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+ 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# This script is heavily based on one I found here:  http://hd-recording.at/dokuwiki/doku.php?id=linux:tmux
+
+SHUF=shuf
+which gshuf &>/dev/null && SHUF=gshuf
+ 
+# usage
+if [[ ! -n "$1" ]]
+then
+    echo "Usage: $0 <host1> <host2> ..."
+    exit 1
+fi
+ 
+# random session id
+session=$(echo ${RANDOM} | md5sum | head -c 10)
+
+SSH_ARGS=()
+if [[ $1 == -p ]] ; then
+    SSH_ARGS+=($1 $2)
+    shift ; shift
+fi
+ 
+host=("$@")
+ 
+# start session and 1st connection 
+echo "Starting session ${session}"
+tmux -2 new-session -d -s "${session}" -x $(tput cols) -y $(tput lines) "ssh -A -o StrictHostKeyChecking=no ${SSH_ARGS[*]} ${host[0]}"
+ 
+ 
+for (( i=1 ; i < ${#host[@]} ; i++))
+do
+    tmux split-window -t "${session}" "ssh -A -o StrictHostKeyChecking=no ${SSH_ARGS[*]} ${host[$i]}"
+    tmux select-layout tiled
+done
+
+tmux set-window-option synchronize-panes on
+tmux attach -t "${session}"

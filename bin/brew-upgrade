@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+brew upgrade
+
+rm -f ~/.brew-updates.txt

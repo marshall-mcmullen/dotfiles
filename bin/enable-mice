@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+IDS=( $(xinput | grep "pointer" | grep -v "core" | grep -Po "id=\K\d*") )
+
+for id in ${IDS[@]}; do
+    xinput enable ${id}
+done
+

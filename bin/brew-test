@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -x
+
+echo "PATH=${PATH}"
+echo "HOME=${HOME}"
+
+$(ebash --source)
+
+brew update > ~/brew.log

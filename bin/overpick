@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 2 ]]; then
+    echo "Usage: [overlay] [package]"
+    exit 1
+fi
+
+overlay="${1}"
+package="${2}"
+
+if [[ -z "${overlay}" || -z "${package}" ]]; then
+    echo "Overlay and name must be non-empty"
+    exit 1
+fi
+
+# Install the overlay but MASK it by default.
+if ! ( layman -L | grep -q "${overlay}" ); then
+    echo "Cannot find requested ${overlay}"
+    exit 1
+fi
+
+yes | layman -a "${overlay}"
+trap "layman -d ${overlay}" EXIT
+
+# Cherry pick the package into our local overlay.
+mkdir -p "/usr/local/portage/${package}"
+rsync -av "/var/lib/layman/${overlay}/${package}/" "/usr/local/portage/${package}"
+
+# Generate digests
+cd "/usr/local/portage/${package}"
+ebuild "$(ls *.ebuild | head -1)" digest
