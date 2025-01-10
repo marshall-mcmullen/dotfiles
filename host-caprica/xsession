@@ -8,13 +8,13 @@ echo "${max_brightness}" > /sys/class/backlight/intel_backlight/brightness
 xrandr --dpi 96 --output eDP-1 --scale 0.5x0.5 --output DP-3-2 --scale 1x1
 
 # Start screensaver
-xautolock -time 5 -locker /usr/local/bin/i3lock-fancy &
+xautolock -time 5 -locker i3lock-fancy &
 
 # Start graphical program launcher
 albert &
 
 # Bluetooth configuration
-/usr/local/bin/bluetooth-trackpad
+bluetooth-trackpad
 dconf write /org/gnome/desktop/peripherals/touchpad/natural-scroll true
 dconf write /org/gnome/desktop/peripherals/mouse/natural-scroll true
 
