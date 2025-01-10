@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+######################################################################################################################
+# 
+# FUNCTIONS
+#
+######################################################################################################################
+
+einfo()
+{
+     echo -e "$(tput setaf 2)$(tput bold)>>$(tput sgr0) ${@}" >&2
+}
+
+die()
+{
+    echo -e "   $(tput setaf 1)$(tput bold)>> ${@}$(tput sgr0)" >&2
+    exit 1
+}
+
+######################################################################################################################
+# 
+# MAIN
+#
+######################################################################################################################
+
+if [[ ! -e "/usr/src/linux/.config" ]]; then
+    die "/usr/src/linux/.config does not exist"
+fi
+
+# Kernel version
+kversion=$(readlink -e "/usr/src/linux" | sed 's|/usr/src/linux-||')
+
+# Build the kernel with CONFIG_INITRAMFS_SOURCE disabled otherwise the first time we build this kernel
+# it will be unable to build. We'll fix it when we build it the second time below.
+sed -i '/^CONFIG_INITRAMFS_.*/d' "/usr/src/linux/.config"
+
+# First build the kernel
+genkernel all "${@}"
+
+# Now unpack initramfs
+einfo "Unpacking initramfs"
+initrd_name="initramfs-${kversion}-x86_64.img"
+initrd_src="/usr/src/${initrd_name}"
+rm -rf "${initrd_src}"
+mkdir -p "${initrd_src}"
+cd "${initrd_src}"
+xz -dc < "/boot/${initrd_name}" | cpio -idmv
+
+# Now rebuild the kernel with embedded initramfs
+einfo "Rebuilding kernel"
+cd /usr/src/linux
+cat <<- EOF >> .config
+CONFIG_INITRAMFS_SOURCE="${initrd_src}"
+CONFIG_INITRAMFS_ROOT_UID=0
+CONFIG_INITRAMFS_ROOT_GID=0
+CONFIG_INITRAMFS_COMPRESSION_XZ=y
+CONFIG_INITRAMFS_COMPRESSION=".xz"
+EOF
+grep "^CONFIG_INITRAMFS" ".config" | sort --unique
+
+make -j$(nproc) olddefconfig
+make -j$(nproc) all
+cp "arch/x86_64/boot/bzImage" "/boot/vmlinuz-${kversion}-x86_64"
+rm -rf "${initrd_src}"
+
+# Now we can install to EFI
+efikernel

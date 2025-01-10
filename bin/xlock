@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+DELAY=$1; shift
+
+if [[ -n "${DELAY}" ]]; then
+
+    xscreensaver-command -activate
+
+    # Cycle screensavers every 60s until delay is over
+    END=$((SECONDS+${DELAY}))
+    while [[ "${SECONDS}" -lt "${END}" ]]; do
+        sleep 60s
+	xscreensaver-command -cycle
+    done
+
+    # Disable screensaver
+    xscreensaver-command -deactivate
+fi
+
+# Lock screen
+i3lock \
+    --nofork \
+    --tiling \
+    --image /usr/share/i3lock/backgrounds/gentoo-matrix-3840x2160.png &
+PID=$!
+
+sleep 5s
+
+# Power off monitors
+xset dpms force off
+
+wait ${PID}

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+emerge --depclean "${@}"
+eclean-kernel

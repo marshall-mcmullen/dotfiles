@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -e
+
+INPUT="${1}"
+NAME=$(basename "${INPUT}")
+
+(
+
+# Check if it is a TV Show
+if [[ ${NAME} =~ (.*)(.S[0-9]+(E[0-9]+)*) ]]; then
+    TITLE="${BASH_REMATCH[1]//\./ }"
+    UNPACK="/media/tv/${TITLE}"
+elif [[ ${NAME} =~ .*FLAC.* ]]; then
+    TITLE=$(basename "${NAME}")
+    UNPACK="/media/music/${TITLE}"
+else
+    TITLE=$(basename "${NAME}")
+    UNPACK="/media/movies"
+fi
+
+echo "+===================================================================="
+echo "| NAME   : ${NAME}"
+echo "| INPUT  : ${INPUT}"
+echo "| TITLE  : ${TITLE}"
+echo "| UNPACK : ${UNPACK}"
+echo "+===================================================================="
+
+RARS=( $(find "${INPUT}" -regextype posix-extended -regex '.*\.r00' || true) )
+
+# Create unpack directory in case it's not there.
+mkdir -p "${UNPACK}"
+
+# Now unpack RARs if found, or already unpacked videos if no rars are present.
+if [[ "${#RARS[@]}" -gt 0 ]]; then
+    echo ">> Extracting Rars: ${RARS[@]}"
+    unrar x -u "${RARS[0]}" "${UNPACK}"
+else
+    echo ">> Copying uncompressed files:"
+    find "${INPUT}"                                      \
+	    -regextype posix-extended                    \
+	    -regex '.*\.(avi|divx|flac|mkv|mp4)'         \
+	    -exec cp --verbose --update "{}" "${UNPACK}" \;
+fi
+
+) | ansi2html                                             \
+  | mail -a 'From: Autobot <autobot.mcmullen@gmail.com>'  \
+         -a 'MIME-Version: 1.0'                           \
+         -a 'Content-Type: text/html; charset=iso-8859-1' \
+         -s "[rtorrent] - Download completed : ${NAME}"   \
+         marshall.mcmullen@gmail.com

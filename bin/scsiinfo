@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#
+# Generate a mapping of SCSI drive to physical slot number
+#
+# The major difference here is that we split out the case where the LSI controller acts as a SAS expander, and the case
+# where the LSI controller doesn't so that we could revert to what we used to be using in the case where there is a SAS
+# expander, and use something new when there wasn't.
+# NOTE - We left the virt-node portion identical to what it was.
+#
+# If we don't have a SAS expander, we can use lsscsi to determine what slots the drivers are in, based on the
+# documentation here: http://sg.danny.cz/scsi/lsscsi.html (version 0.26 example)
+# If a SAS expander is present we can just use sysfs to determine slot numbers, without it we can use lsscsi to
+# enumerate slots.
+# NOTE - In this case, we need to take into account the slot offset necessary for the node type.
+###############
+
+# If we have a sas expander, we want to use what the kernel has already set up as far as slot numbering, since that
+# works well and avoids using external tools.
+
+FOUND=0
+
+if [[ -d /sys/class/sas_expander ]]; then
+    for name in /sys/block/* ; do
+        npath=$(readlink -f "${name}") || break
+        while [[ ${npath} != "." && ${npath} != "/" ]]; do
+            npath=$(dirname "${npath}")
+            ep=$(basename "${npath}")
+
+            bay=""
+            if [[ -e ${npath}/sas_device/${ep}/bay_identifier ]]; then
+                bay=$(cat ${npath}/sas_device/${ep}/bay_identifier 2> /dev/null)
+            fi
+            if [[ -z "${bay}" && -e ${npath}/sas_device/${ep}/phy_identifier ]]; then
+                # if we failed to read bay_identifier (*cough* SF9608 *cough*), use phy_identifier
+                phy=$(cat ${npath}/sas_device/${ep}/phy_identifier 2> /dev/null)
+                bay=$((phy + 1))
+            fi
+            if [[ -n "${bay}" ]]; then
+                echo "$(basename ${name}):${bay}"
+                FOUND=1
+                break
+            fi
+        done
+    done
+fi
+
+if [[ ${FOUND} -eq 0 ]] ; then
+    # Expected output from lsscsi is '[6]    mpt2sas' and we want the number '6' so we know what BUS it is in.
+    # NOTE: This awk delimiter probably looks backwards as you probably rightly think this should be '[]'. However,
+    #       awk has a crazy 'feature' wherein '[' is closed with ']', except when ']' follows immediately the opening.
+    #       So to avoid that we invert the opening and closing delimiters which has the desired effect.
+    # NOTE: You also might think you could escape the delimiters, but that doesn't work properly on newer versions
+    #       of awk like it did on older versions. It causes us to get no output at all.
+    EXTERNAL_BUS=$(lsscsi -H | awk -F'[][]' '/mpt[23]sas/ {print $2}')
+    while read -r line; do
+        if [[ "${line}" =~ ^\[[0-9]+:[0-9]+:([0-9]+):[0-9]+\].*?\/dev\/(sd.)$ ]]; then
+            echo "${BASH_REMATCH[2]}:${BASH_REMATCH[1]}"
+        fi
+    done <<< "$(lsscsi ${EXTERNAL_BUS})"
+fi

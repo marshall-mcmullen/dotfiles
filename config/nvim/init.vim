@@ -27,6 +27,7 @@ Plug 'junegunn/vim-emoji'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neomake/neomake'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'sbdchd/neoformat'
@@ -198,6 +199,35 @@ if &diff
 endif
 
 "----------------------------------------------
+" Code Completion
+"----------------------------------------------
+
+" Use tab for trigger completion with characters ahead and navigate
+" in the completion list and ENTER to select it.
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
+
+" Use <c-space> to trigger completion
+inoremap <silent><expr> <C-Space> coc#refresh()
+
+" Use [g and ]g to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call CocActionAsync('doHover')<CR>
+
+" Use gd to go to definition of symbol under cursor
+nmap <silent> gd <Plug>(coc-definition)
+
+" Use gr to find references of symbol under cursor
+nmap <silent> gr <Plug>(coc-references)
+
+" Automatically show diagnostics in the status line
+set updatetime=300
+
+"----------------------------------------------
 " Searching
 "----------------------------------------------
 set incsearch                     " move to match as you type the search query
@@ -259,6 +289,15 @@ nnoremap <leader>h :split<cr>
 
 " Closing splits
 nnoremap <leader>q :close<cr>
+
+"----------------------------------------------
+" Sorting
+"----------------------------------------------
+" Custom natural sort command that works with line ranges
+command! -range=% SortV <line1>,<line2>!sort -V
+
+" Create an alias so that ':sortv' command gets mapped to ":SortV" function
+cnoreabbrev sortv SortV
 
 "----------------------------------------------
 " Plugin: Clang Format
