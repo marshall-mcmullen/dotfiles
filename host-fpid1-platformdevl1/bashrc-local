@@ -1,0 +1,14 @@
+DEFAULT_USER=mmcmullen
+
+# Load modules
+{
+    module load clang-20.1.0
+    module load git-latest
+    module load git-lfs-latest
+    module load golang-latest
+    module load jtnctl-latest
+    module load neovim-latest
+    module load nodejs-latest
+} &> /dev/null
+
+PATH+=":${NEOVIM_PREFIX}/bin"
