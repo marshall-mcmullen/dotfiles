@@ -1,5 +1,3 @@
-DEFAULT_USER=mmcmullen
-
 # Load modules
 {
     module load clang-20.1.0
