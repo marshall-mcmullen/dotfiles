@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+######################################################################################################################
+# 
+# FUNCTIONS
+#
+######################################################################################################################
+
+einfo()
+{
+     echo -e "$(tput setaf 2)$(tput bold)>>$(tput sgr0) ${@}" >&2
+}
+
+die()
+{
+    echo -e "   $(tput setaf 1)$(tput bold)>> ${@}$(tput sgr0)" >&2
+    exit 1
+}
+
+indexes()
+{
+    for entry in $(efibootmgr | grep "^Boot" | awk '{print $1}' | sed -e 's|Boot||' -e 's|\*$||'); do
+
+        if [[ "${entry}" == @(Current:|Order:) ]]; then
+            continue
+        fi
+
+        echo "${entry}"
+    done
+}
+
+reset()
+{
+    einfo "Resetting efibootmgr NVRAM entries"
+    for index in $(indexes); do
+        efibootmgr -b "${index}" -B >/dev/null
+    done
+
+    efibootmgr
+}
+
+install()
+{           
+    # Map our /dev/md0 to physical devices. Store in indexed array by SLOT
+    slots=()
+    for sdev in $(mdadm -v --detail --scan "/dev/md0" | awk -F= '/^[ ]+devices/ {print $2}' | tr ',' '\n' | sed -e 's|/dev/||' -e 's|[0-9]$||'); do
+	slot=$(./scsiinfo | grep -oP "${sdev#/dev/}:\K.*")
+	slots[${slot}]="${sdev}"
+    done
+
+    einfo "Installing Grub into EFI"
+    declare -p slots
+
+    for slot in ${!slots[@]}; do
+        efibootmgr \
+	  --create \
+	  --disk "/dev/${slots[$slot]}" \
+	  --label "Slot#${slot}: NixOS" \
+	  --loader '/EFI/NixOS-boot-efi/grubx64.efi' #>/dev/null
+    done
+}
+
+bootorder()
+{
+    einfo "Fixing Boot Order"
+    efibootmgr --bootorder $(indexes | tr '\n' ',' | sed 's|,$||') >/dev/null
+}
+
+show()
+{
+    efibootmgr
+}
+
+######################################################################################################################
+# 
+# MAIN
+#
+######################################################################################################################
+
+ACTION=${1:-all}
+
+if [[ "${ACTION}" == "all" ]]; then
+    reset
+    install
+    bootorder
+    show
+elif declare -f "${ACTION}" &>/dev/null; then
+    "${ACTION}"
+else
+    echo "Unsupported operation '${ACTION}'"
+    exit 1
+fi

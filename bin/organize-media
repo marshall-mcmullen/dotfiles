@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+set -o pipefail
+
+# Directory Paths
+MEDIA="/media"
+PHOTOS="${MEDIA}/photos"
+PHOTOS_IN="${PHOTOS}/Incoming"
+
+# Move incoming photos over
+mkdir -p "${PHOTOS_IN}"
+echo ">> Pulling in incoming photos"
+for fname in $(find /var/lib/resilio-sync/shared -type f -not -path '*/.*'); do
+    mv -v "${fname}" "${PHOTOS_IN}"
+done
+
+# Fix /media ownership
+echo ">> Fixing ${MEDIA} ownership"
+find "${MEDIA}" \( \! -user plex -or \! -group media \) -exec chown --changes plex:media {} \;
+
+# Fix /media permissions
+echo ">> Fixing ${MEDIA} permissions"
+find "${MEDIA}" -type d \! -perm 775 -exec chmod --changes 775 {} \; 
+find "${MEDIA}" -type f \! -perm 664 -exec chmod --changes 664 {} \; 
+
+# Deduplicate /media/photos
+echo ">> Deduping ${PHOTOS}"
+fdupes --quiet --recurse --delete --noprompt "${PHOTOS}"
+
+# Sort any incoming unsorted photos
+if [[ -d "${PHOTOS_IN}" ]]; then
+    echo ">> Sorting Incoming Family photos"
+    pushd "${PHOTOS}/Family" &> /dev/null
+    exiftool -progress -preserve -recurse -ignoreMinorErrors '-FileName<CreateDate' -d '%Y/%Y-%m/%Y-%m-%d-%H-%M-%S%%-c.%%le' "${PHOTOS_IN}"
+    popd &> /dev/null
+fi
+
+# Remove any empty directories
+echo ">> Removing empty directories"
+find "${MEDIA}" -mindepth 1 -type d -empty -delete -ls
+

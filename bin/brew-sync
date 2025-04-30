@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+$(ebash --source --color)
+
+brew update |& edebug
+
+output="${HOME}/.brew-updates.txt"
+
+readarray -t updates < <(brew outdated --json | jq -r '.formulae | map([.name, (.installed_versions | join(",")), .current_version, .pinned, .pinned_version] | join("|")) | join("\n")')
+
+if [[ -z "${updates[@]}" ]]; then
+    cat /dev/null > "${output}"
+    chmod 644 "${output}"
+    exit 0
+fi
+
+etable \
+    --style=boxart                                   \
+    --title "Available Updates ══ $(date)"           \
+    "Name|Installed|Available|Pinned|Pinned Version" \
+    "${updates[@]}"                                  \
+    > "${output}"
+
+chmod 644 "${output}"

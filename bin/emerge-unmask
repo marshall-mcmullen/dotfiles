@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+emerge --autounmask --autounmask-write --autounmask-continue $@

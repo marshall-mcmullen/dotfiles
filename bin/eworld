@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+OUTPUT="/etc/portage/updates.txt"
+
+source /lib/gentoo/functions.sh
+
+emerge --update --newuse --deep --with-bdeps=y @world "${@}"
+
+if [[ ${UPDATE:-1} -eq 1 && -w "${OUTPUT}" ]]; then
+    einfo "Updating ${OUTPUT}"
+    cat /dev/null > "${OUTPUT}"
+fi

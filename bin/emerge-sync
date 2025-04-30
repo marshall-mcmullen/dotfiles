@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+eix-sync
+
+OUTPUT="/etc/portage/updates.txt"
+
+UPDATES=( "$(UPDATE=0 eworld --pretend --color=y 2>/dev/null \
+    | grep --color=never --only-matching --perl-regexp "^\[.*" \
+    | sed -e 's|\[.*\] | │ |')"
+)
+
+if [[ -z "${UPDATES[@]}" ]]; then
+    cat /dev/null > "${OUTPUT}"
+    chmod 644 "${OUTPUT}"
+    exit 0
+fi
+
+{
+    echo " ┌─ Available Updates ── $(date) ──────────────────────"
+    echo " │ "
+    echo "${UPDATES[@]}"
+    echo " │ "
+    echo " └──────────────────────────────────────────────────────────────────────────────"
+    echo ""
+
+} > "${OUTPUT}"
+
+chmod 644 "${OUTPUT}"

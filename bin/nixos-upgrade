@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
 
-nixos-rebuild switch --upgrade |& nom
+set -e
+set -o pipefail
+
+die() {
+    echo -e "\033[1;31m!! $1 !!\033[0m"
+    exit 1
+}
+
+if ! nixos-rebuild switch --cores $(nproc) --upgrade; then
+    die "NixOS Build Failure"
+fi |& nom
+
 cat /dev/null > /etc/motd

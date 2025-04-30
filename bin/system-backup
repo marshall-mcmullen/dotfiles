@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Mount backup path first
+if grep -qs "/mnt/backup" /etc/fstab && ! grep -qs '/mnt/backup ' /proc/mounts; then
+    mount /mnt/backup
+    trap "umount -l /mnt/backup" EXIT
+fi
+
+DEST="/mnt/backup/Stage4"
+if [[ ! -d "${DEST}" ]]; then
+    echo "${DEST} does not exist"
+    exit 1
+fi
+
+OUTPUT="${DEST}/$(hostname -s)-stage4"
+mkstage4 -q -c -s "${OUTPUT}"           \
+    --verbose                        	\
+    --exclude=/.snapshots            	\
+    --exclude=/data                  	\
+    --exclude=/etc/ssh/ssh_host*	\
+    --exclude=/etc/msmtprc              \
+    --exclude=/etc/aliases              \
+    --exclude=/home                  	\
+    --exclude=/root                  	\
+    --exclude=/usr/local/.git        	\
+    --exclude=/usr/portage/distfiles 	\
+    --exclude=/var/cache             	\
+    --exclude=/var/lib/docker        	\
+    --exclude=/var/lib/kubelet       	\
+    --exclude=/var/lib/libvirt/images 	\
+    --exclude=/var/lib/borg/cache       \
+    --exclude=/var/lib/borg/security    \
+    --exclude=/var/tmp               	\
+    "${@}"
+
+echo "==== BACKUP COMPLETE ===="
+ls -lh "${OUTPUT}.tar.bz2"

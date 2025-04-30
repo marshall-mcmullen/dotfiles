@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+source "/etc/borg/borg.conf"
+
+/usr/bin/borg "${@}"

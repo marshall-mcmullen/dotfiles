@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+IDS=( $(xinput | grep "pointer" | grep -v "core" | grep -Po "id=\K\d*") )
+
+xscreensaver-command -watch | awk '{print $1; system("")}' | while read event; do
+   
+    if [[ "${event}" == "LOCK" ]]; then
+        ACTION="disable"
+    elif [[ "${event}" == "UNBLANK" ]]; then
+	ACTION="enable"
+    else
+	continue
+    fi
+
+    for id in ${IDS[@]}; do
+        xinput "${ACTION}" ${id}
+    done
+
+done

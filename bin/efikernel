@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+######################################################################################################################
+# 
+# FUNCTIONS
+#
+######################################################################################################################
+
+einfo()
+{
+     echo -e "$(tput setaf 2)$(tput bold)>>$(tput sgr0) ${@}" >&2
+}
+
+die()
+{
+    echo -e "   $(tput setaf 1)$(tput bold)>> ${@}$(tput sgr0)" >&2
+    exit 1
+}
+
+indexes()
+{
+    for entry in $(efibootmgr | grep "^Boot" | awk '{print $1}' | sed -e 's|Boot||' -e 's|\*$||'); do
+
+        if [[ "${entry}" == @(Current:|Order:) ]]; then
+            continue
+        fi
+
+        echo "${entry}"
+    done
+}
+
+mountboot()
+{
+     if grep -qs "/boot/efi" /etc/fstab && ! grep -qs '/boot/efi ' /proc/mounts; then
+        einfo "Mounting Boot"
+        mount /boot/efi
+        trap "umount /boot/efi" EXIT
+    fi
+}
+
+reset()
+{
+    einfo "Resetting efibootmgr NVRAM entries"
+    for index in $(indexes); do
+        efibootmgr -b "${index}" -B >/dev/null
+    done
+
+    efibootmgr
+}
+
+install()
+{           
+    einfo "Installing kernel into EFI"
+
+    for kernel_path in $(ls /boot/vmlinuz-* | sort --version-sort --reverse); do
+        
+        kernel="$(basename "${kernel_path}")"
+        if [[ "${kernel}" =~ ".old" ]]; then
+            continue
+        fi
+
+	mkdir -p "/boot/efi/EFI/gentoo"
+        cp "/boot/${kernel}" "/boot/efi/EFI/gentoo"
+        mv "/boot/efi/EFI/gentoo/${kernel}" "/boot/efi/EFI/gentoo/${kernel}.efi"
+
+	efibootmgr \
+		--create \
+		--disk "/dev/nvme0n1p1" \
+		--label "Gentoo ${kernel##vmlinuz-}" \
+		--loader '\efi\gentoo\'${kernel}'.efi' >/dev/null
+    done
+}
+
+bootorder()
+{
+    einfo "Fixing Boot Order"
+    efibootmgr --bootorder $(indexes | tr '\n' ',' | sed 's|,$||') >/dev/null
+}
+
+show()
+{
+    efibootmgr
+}
+
+######################################################################################################################
+# 
+# MAIN
+#
+######################################################################################################################
+
+ACTION=${1:-all}
+
+if [[ "${ACTION}" == "all" ]]; then
+    mountboot
+    reset
+    install
+    bootorder
+    show
+elif declare -f "${ACTION}" &>/dev/null; then
+    "${ACTION}"
+else
+    echo "Unsupported operation '${ACTION}'"
+    exit 1
+fi
