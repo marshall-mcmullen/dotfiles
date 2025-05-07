@@ -1,3 +1,6 @@
+DEFAULT_USER=mmcmullen
+unset SSH_CLIENT
+
 # Load modules
 {
     module load clang-20.1.0
@@ -10,4 +13,3 @@
 } &> /dev/null
 
 PATH+=":${NEOVIM_PREFIX}/bin"
-SSH_CLIENT=
