@@ -10,3 +10,4 @@
 } &> /dev/null
 
 PATH+=":${NEOVIM_PREFIX}/bin"
+SSH_CLIENT=
