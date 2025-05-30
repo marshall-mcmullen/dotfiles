@@ -146,6 +146,7 @@ alias kj='kill -9 %1'
 alias diff='colordiff'
 alias sgit='sudo -E git -c "include.path='${HOME}'/.gitconfig"'
 alias chrome='google-chrome-stable'
+alias jsh='jtnctl --shell --host'
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -177,7 +178,6 @@ fi
 
 # Go
 export GOPATH=~/code/go
-export GOPRIVATE=github.com/reserve-trust/*
 
 if [[ -f ~/.fzf.bash ]]; then
     source ~/.fzf.bash
