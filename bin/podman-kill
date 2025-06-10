@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-podman kill --signal SIGKILL $(podman ps --quiet | awk '{print $1}' | grep -v CONTAINER)
+for id in $(podman ps --quiet); do
+    echo ">> Killing ${id}"
+    podman stop "${id}"
+    podman kill --signal SIGKILL "${id}"
+done
