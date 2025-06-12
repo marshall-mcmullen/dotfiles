@@ -3,4 +3,5 @@
 for id in $(podman ps --quiet); do
     echo ">> Killing ${id}"
     podman kill --signal SIGKILL "${id}"
+    podman rm -f "${id}"
 done
