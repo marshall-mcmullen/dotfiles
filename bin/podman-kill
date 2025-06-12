@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+pkill -9 -f podman
+
 for id in $(podman ps --quiet); do
     echo ">> Killing ${id}"
     podman kill --signal SIGKILL "${id}"
