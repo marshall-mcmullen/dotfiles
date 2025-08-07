@@ -13,3 +13,7 @@ unset SSH_CLIENT
 } &> /dev/null
 
 PATH+=":${NEOVIM_PREFIX}/bin"
+
+# Aliases
+alias jsh='jtnctl --shell --host'
+alias jn='jtnctl --host'
