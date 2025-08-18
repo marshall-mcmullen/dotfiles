@@ -11,7 +11,7 @@ vi()
     if [[ "${@}" =~ "/" ]]; then
         ${vim} "${@}"
     elif command -v fzf &>/dev/null && [[ $# -eq 1 ]]; then
-        ${vim} -p "$(fzf --multi --select-1 --exact --query "${1}")"
+        ${vim} -p "$(fzf --walker-skip=build,.git --multi --select-1 --exact --query "${1}")"
     else
         ${vim} -p "${@}"
     fi
