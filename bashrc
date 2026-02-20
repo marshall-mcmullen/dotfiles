@@ -97,6 +97,7 @@ export LC_ALL=en_US.UTF-8
 BREW_PATH="$(command -v brew 2>/dev/null)"
 if [[ -n "${BREW_PATH}" ]]; then
     BREW_PATH="${BREW_PATH%/bin/brew}"
+    export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 fi
 
 ## Path
