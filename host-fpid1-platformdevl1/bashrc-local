@@ -3,7 +3,6 @@ unset SSH_CLIENT
 
 # Load modules
 {
-    module load btop-1.3.2
     module load clang-20.1.0
     module load git-latest
     module load git-lfs-latest
@@ -11,6 +10,7 @@ unset SSH_CLIENT
     module load jtnctl-latest
     module load neovim-latest
     module load nodejs-latest
+    module load tmux-latest
 } &> /dev/null
 
 PATH+=":${NEOVIM_PREFIX}/bin"
