@@ -85,6 +85,7 @@ source $OSH/oh-my-bash.sh
 
 # Terminal settings
 export TERM=xterm-256color
+export LS_COLORS="${LS_COLORS}:ln=33"
 
 # Disable noclobber which oh-my-bash enabled
 set +o noclobber
