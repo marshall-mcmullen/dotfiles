@@ -963,4 +963,7 @@ au FileType yaml set shiftwidth=2
 au FileType yaml set softtabstop=2
 au FileType yaml set tabstop=2
 
-set completefunc=emoji#complete
+"----------------------------------------------
+" ANSI Escape Log Files
+"----------------------------------------------
+autocmd BufReadPost,BufNewFile *.log,*.txt,*.out AnsiEsc
