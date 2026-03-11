@@ -160,7 +160,7 @@ endif
 set background=dark
 
 " colorscheme settings
-colorscheme desert
+colorscheme slate
 
 " Override the search highlight color with a combination that is easier to
 " read. The default PaperColor is dark green backgroun with black foreground.
