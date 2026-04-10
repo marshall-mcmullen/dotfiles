@@ -1,3 +1,6 @@
+clipboard-read = allow
+clipboard-write = allow
 font-family = Libration Mono for Powerline
 font-size = 13
 theme = Darkside
+
