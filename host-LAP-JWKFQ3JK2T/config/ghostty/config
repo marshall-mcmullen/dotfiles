@@ -2,6 +2,7 @@ background-blur = 90
 background-opacity = 0.9
 clipboard-read = allow
 clipboard-write = allow
+copy-on-select = clipboard
 font-family = SF Mono
 font-size = 13
 font-thicken = true
